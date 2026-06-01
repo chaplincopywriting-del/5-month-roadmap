@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivit Co. — 5-Month Roadmap to Thailand</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --gold: #f0b429;
+    --gold-dim: #c49222;
+    --gold-glow: rgba(240, 180, 41, 0.12);
+    --teal: #0fd4b4;
+    --teal-dim: #0aaa90;
+    --red: #f05252;
+    --text: #e8e8f0;
+    --text-muted: #8888aa;
+    --text-dim: #555577;
+    --phase-1: #7c6af5;
+    --phase-2: #f0b429;
+    --phase-3: #0fd4b4;
+    --phase-4: #f0724a;
+    --phase-5: #e060f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(240,180,41,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(124,106,245,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(15,212,180,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240,180,41,0.1);
+    border: 1px solid rgba(240,180,41,0.25);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 7vw, 88px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, #f0b429 0%, #f07020 50%, #e060f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(14px, 2vw, 18px);
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+
+  .hero-dates {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .hero-dates .sep {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── TARGET BOX ─── */
+  .target-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+  }
+
+  .target-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .target-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .target-card::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(240,180,41,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .target-card h2 {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .target-card p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .target-card p:last-child { margin-bottom: 0; }
+
+  .highlight {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    flex: 1;
+    min-width: 140px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .stat-pill .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-pill .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── TIMELINE TRACK ─── */
+  .timeline-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .timeline-header h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+
+  .timeline-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  /* month nav bar */
+  .month-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 48px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .month-nav::-webkit-scrollbar { display: none; }
+
+  .month-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .month-btn:hover, .month-btn.active {
+    color: var(--text);
+    border-color: currentColor;
+  }
+
+  .month-btn[data-phase="1"] { --c: var(--phase-1); }
+  .month-btn[data-phase="2"] { --c: var(--phase-2); }
+  .month-btn[data-phase="3"] { --c: var(--phase-3); }
+  .month-btn[data-phase="4"] { --c: var(--phase-4); }
+  .month-btn[data-phase="5"] { --c: var(--phase-5); }
+
+  .month-btn:hover, .month-btn.active {
+    color: var(--c);
+    border-color: var(--c);
+    background: color-mix(in srgb, var(--c) 8%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 30%, transparent);
+  }
+
+  /* phase cards */
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    margin-bottom: 32px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    scroll-margin-top: 24px;
+  }
+
+  .phase-card:hover {
+    border-color: color-mix(in srgb, var(--phase-color) 40%, var(--border));
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 36px 40px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    background: color-mix(in srgb, var(--phase-color) 15%, transparent);
+    color: var(--phase-color);
+    border: 1px solid color-mix(in srgb, var(--phase-color) 30%, transparent);
+  }
+
+  .phase-meta { flex: 1; }
+
+  .phase-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--phase-color);
+    margin-bottom: 6px;
+  }
+
+  .phase-title {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .phase-dates {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .phase-toggle {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 16px;
+    transition: all 0.2s;
+    margin-top: 10px;
+  }
+
+  .phase-card.open .phase-toggle {
+    transform: rotate(180deg);
+    background: color-mix(in srgb, var(--phase-color) 12%, transparent);
+    border-color: var(--phase-color);
+    color: var(--phase-color);
+  }
+
+  .phase-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--phase-color), color-mix(in srgb, var(--phase-color) 30%, transparent));
+    opacity: 0.4;
+  }
+
+  .phase-body {
+    display: none;
+    padding: 0 40px 40px;
+  }
+
+  .phase-card.open .phase-body { display: block; }
+
+  .mission-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--phase-color);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .mission-box strong {
+    color: var(--text);
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--phase-color);
+    margin-bottom: 6px;
+  }
+
+  /* weeks */
+  .weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .week-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .week-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--phase-color);
+    margin-bottom: 12px;
+  }
+
+  .week-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .week-card li {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .week-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--phase-color);
+    opacity: 0.5;
+  }
+
+  /* success / redflag */
+  .outcome-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .outcome-row { grid-template-columns: 1fr; }
+  }
+
+  .outcome-box {
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .outcome-box.success {
+    background: rgba(15,212,180,0.05);
+    border: 1px solid rgba(15,212,180,0.2);
+  }
+
+  .outcome-box.danger {
+    background: rgba(240,82,82,0.05);
+    border: 1px solid rgba(240,82,82,0.2);
+  }
+
+  .outcome-box .outcome-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .outcome-box.success .outcome-label { color: var(--teal); }
+  .outcome-box.danger .outcome-label { color: var(--red); }
+  .outcome-box p { color: var(--text-muted); }
+
+  /* ─── GAP TABLE ─── */
+  .gap-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .gap-section h2 {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+
+  .gap-section .sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .gap-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .gap-table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gap-table th {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .gap-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.15s;
+  }
+
+  .gap-table tbody tr:hover {
+    background: var(--surface2);
+  }
+
+  .gap-table td {
+    padding: 16px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .gap-table td:first-child {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .gap-table .now { color: var(--red); font-weight: 600; }
+  .gap-table .target { color: var(--teal); font-weight: 600; }
+
+  .gap-arrow {
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* ─── HABITS TABLE ─── */
+  .habits-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .habits-section h2 {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+
+  .habits-section .sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .habit-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .habit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .habit-row:hover {
+    border-color: rgba(240,180,41,0.25);
+  }
+
+  .habit-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .habit-freq {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .habit-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(240,180,41,0.1);
+    border: 1px solid rgba(240,180,41,0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+
+  /* ─── ONE RULE ─── */
+  .rule-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .rule-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rule-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(240,180,41,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .rule-card .quote-mark {
+    font-size: 80px;
+    line-height: 0.6;
+    color: rgba(240,180,41,0.15);
+    font-family: Georgia, serif;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .rule-card blockquote {
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto 32px;
+    font-style: normal;
+  }
+
+  .rule-card blockquote em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .rule-highlight {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  footer strong {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ─── PROGRESS BAR AT TOP ─── */
+  .progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--border);
+    z-index: 100;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--phase-1), var(--phase-2), var(--phase-3), var(--phase-4), var(--phase-5));
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ─── SCROLL-IN ANIMATION ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 3px;
+    left: 0;
+    right: 0;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+    background: var(--surface2);
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .phase-header { padding: 24px; }
+    .phase-body { padding: 0 24px 24px; }
+    .target-card { padding: 28px; }
+    .rule-card { padding: 36px 28px; }
+    .habit-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .phase-1-card { --phase-color: var(--phase-1); }
+  .phase-2-card { --phase-color: var(--phase-2); }
+  .phase-3-card { --phase-color: var(--phase-3); }
+  .phase-4-card { --phase-color: var(--phase-4); }
+  .phase-5-card { --phase-color: var(--phase-5); }
+
+  /* open by default indicator */
+  .phase-card.open .phase-bar {
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+
+<nav>
+  <div class="nav-logo">RIVIT CO.</div>
+  <div class="nav-links">
+    <a href="#phases">Phases</a>
+    <a href="#habits">Non-Negotiables</a>
+    <a href="#gaps">Gap Summary</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-tag">5-Month Roadmap</div>
+  <h1><span>Rivit Co.</span></h1>
+  <p class="hero-sub">From First Sale to Running It From a Beach in Thailand</p>
+  <div class="hero-dates">
+    <span>June 2026</span>
+    <div class="sep"></div>
+    <span>November 2026</span>
+  </div>
+</section>
+
+<!-- ─── TARGET ─── -->
+<section class="target-section" id="target">
+  <div class="target-card fade-up">
+    <div class="section-label">The Honest Target</div>
+    <h2>Not £10k/month.<br>£1,000+/month by Thailand.</h2>
+    <p>The dream is £10k/month. That's a 2–3 year goal if you execute well. The 5-month goal is simpler: <span class="highlight">arrive in Thailand with a business that is making consistent revenue</span> — not a project you're hoping will work.</p>
+    <p>That means proving the product sells, finding a winning ad creative, and building enough momentum that you can run Rivit Co. from a laptop in Southeast Asia without it dying.</p>
+    <div class="stat-row">
+      <div class="stat-pill">
+        <div class="num">£1k+</div>
+        <div class="label">Monthly Target</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">~77</div>
+        <div class="label">Sales / Month</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">2–3</div>
+        <div class="label">Sales Per Day</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">£12.99</div>
+        <div class="label">Per Unit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TIMELINE ─── -->
+<section class="timeline-section" id="phases">
+  <div class="timeline-header fade-up">
+    <div class="section-label">The Roadmap</div>
+    <h2>Five Phases. Five Months.</h2>
+    <p>Click a phase to expand. Tap a month to jump there.</p>
+  </div>
+
+  <div class="month-nav">
+    <button class="month-btn" data-phase="1" onclick="jumpTo('phase-1')">June — Validation</button>
+    <button class="month-btn" data-phase="2" onclick="jumpTo('phase-2')">July — Optimisation</button>
+    <button class="month-btn" data-phase="3" onclick="jumpTo('phase-3')">August — First Revenue</button>
+    <button class="month-btn" data-phase="4" onclick="jumpTo('phase-4')">Sept–Oct — Systems</button>
+    <button class="month-btn" data-phase="5" onclick="jumpTo('phase-5')">November — Thailand</button>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card phase-1-card open fade-up" id="phase-1">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">1</div>
+      <div class="phase-meta">
+        <div class="phase-tag">Phase 1 · Validation</div>
+        <div class="phase-title">Does anyone actually buy this?</div>
+        <div class="phase-dates">June 1 – June 30, 2026</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-bar"></div>
+    <div class="phase-body">
+      <div class="mission-box">
+        <strong>The Mission</strong>
+        Get your first paid sales. Find out your Cost Per Purchase (CPP). Understand if the product can be profitable with paid ads. This is the only question that matters right now — everything else is noise.
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-label">Week 1 · June 1–7</div>
+          <ul>
+            <li>Confirm pixel is firing correctly on Shopify ✓</li>
+            <li>Launch first Meta ad campaign — 2–3 ad sets, £5–10/day each</li>
+            <li>Test 2–3 different creatives (UGC-feel + clean product shot)</li>
+            <li>Hook to test: "Ditch the Tripod" — gym rack snap, quick setup</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">Week 2 · June 8–14</div>
+          <ul>
+            <li>Read the data: CPM, CTR, Add to Cart, Purchases</li>
+            <li>Kill anything with CTR below 1%</li>
+            <li>Zero purchases at £30–40 spend? New creative angle — not new product</li>
+            <li>Purchases at £15–25 CPP? You have something to work with</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">Weeks 3–4 · June 15–30</div>
+          <ul>
+            <li>Iterate on what's working. Kill what isn't.</li>
+            <li>Test one new audience or creative per week minimum</li>
+            <li>Goal: at least 5–10 total sales by end of June</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-box success">
+          <div class="outcome-label">✓ Success Metric</div>
+          <p>First sale made. CPP understood. You know which creative direction is working.</p>
+        </div>
+        <div class="outcome-box danger">
+          <div class="outcome-label">⚠ Red Flag</div>
+          <p>Zero purchases after £100 spend across multiple creatives = the ad <em>angle</em> is wrong, not the product. Change the hook entirely before giving up.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card phase-2-card fade-up" id="phase-2">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">2</div>
+      <div class="phase-meta">
+        <div class="phase-tag">Phase 2 · Optimisation</div>
+        <div class="phase-title">Find the winning formula.</div>
+        <div class="phase-dates">July 1 – July 31, 2026</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-bar"></div>
+    <div class="phase-body">
+      <div class="mission-box">
+        <strong>The Mission</strong>
+        You've got data. Now find the ad that prints. One creative + audience combo that produces consistent purchases at a CPP that leaves profit margin. At £12.99, you need CPP below £8–9 to be profitable after product cost and shipping.
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-label">Weeks 1–2 · July 1–14</div>
+          <ul>
+            <li>Scale budget on winning ad sets (double if CPP is profitable)</li>
+            <li>Kill anything not converted after £20–30 spend</li>
+            <li>New creative: before/after (chaotic gym filming vs. clean Rivit setup)</li>
+            <li>Test video vs. static if you haven't already</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">Weeks 3–4 · July 15–31</div>
+          <ul>
+            <li>Winning ad? Duplicate the ad set, increase budget 20% at a time</li>
+            <li>Start collecting customer emails — you'll need the list later</li>
+            <li>First organic content: one Instagram Reel per week (real gym use)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-box success">
+          <div class="outcome-label">✓ Success Metric</div>
+          <p>£300–500 revenue for the month. One ad creative that's consistently profitable.</p>
+        </div>
+        <div class="outcome-box danger">
+          <div class="outcome-label">⚠ Red Flag</div>
+          <p>Still no winning creative after £200 total spend. Reconsider the creative strategy — you may need UGC from real gym-goers, not polished product shots.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-card phase-3-card fade-up" id="phase-3">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">3</div>
+      <div class="phase-meta">
+        <div class="phase-tag">Phase 3 · First Real Revenue</div>
+        <div class="phase-title">Prove it's a real business.</div>
+        <div class="phase-dates">August 1 – August 31, 2026</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-bar"></div>
+    <div class="phase-body">
+      <div class="mission-box">
+        <strong>The Mission</strong>
+        Hit £500+ revenue in a single month. Scale what's working. Start building brand infrastructure beyond just ads.
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-label">Weeks 1–2 · Aug 1–14</div>
+          <ul>
+            <li>Scaling winning ad sets</li>
+            <li>Add second product test if Flex Ring is proven</li>
+            <li>Start post-purchase email sequence (thank you → review → repeat)</li>
+            <li>First organic push: 3 Reels this month targeting gym content creators</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">Weeks 3–4 · Aug 15–31</div>
+          <ul>
+            <li>Review monthly numbers honestly</li>
+            <li>Profitable → plan September budget increase</li>
+            <li>Borderline → cut costs, focus organic, don't scale until margin is fixed</li>
+            <li>Personal brand: start building Dane's face behind the brand</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-box success">
+          <div class="outcome-label">✓ Success Metric</div>
+          <p>£500+ revenue. Positive ROAS. Email list started.</p>
+        </div>
+        <div class="outcome-box danger">
+          <div class="outcome-label">⚠ Watch Out</div>
+          <p>People buy from people. Don't be a faceless brand — your personal angle is a real competitive advantage in the gym content space.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-card phase-4-card fade-up" id="phase-4">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">4</div>
+      <div class="phase-meta">
+        <div class="phase-tag">Phase 4 · Consistency + Systems</div>
+        <div class="phase-title">Build something that runs without you.</div>
+        <div class="phase-dates">September 1 – October 31, 2026</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-bar"></div>
+    <div class="phase-body">
+      <div class="mission-box">
+        <strong>The Mission</strong>
+        This phase matters most for Thailand. If Rivit Co. needs your constant attention to survive, you can't travel with it. You need systems that run in 1 hour/day.
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-label">September</div>
+          <ul>
+            <li>Automate: email flows, order fulfilment, customer service templates</li>
+            <li>Document your ad process — manageable in 1 hour/day</li>
+            <li>Target: £750+ revenue</li>
+            <li>Organic: 8–10 Reels, building a gym-goer audience</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">October</div>
+          <ul>
+            <li>Stress-test the systems. Could you run this from your phone for a week?</li>
+            <li>Target: £1,000+ revenue</li>
+            <li>Start thinking about next product — what do customers actually want?</li>
+            <li>Pre-Thailand goal: 3 months consistent sales data</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-box success">
+          <div class="outcome-label">✓ Success Metric</div>
+          <p>Business runs with 1 hour/day. £1k revenue in October. Clear picture of what's working and why.</p>
+        </div>
+        <div class="outcome-box danger">
+          <div class="outcome-label">⚠ The Test</div>
+          <p>Could you run this from your phone for a week? If not — it's not ready for Thailand. Fix it before you board the plane.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-card phase-5-card fade-up" id="phase-5">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">5</div>
+      <div class="phase-meta">
+        <div class="phase-tag">Phase 5 · Thailand</div>
+        <div class="phase-title">Arrive with momentum.</div>
+        <div class="phase-dates">November 2026</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-bar"></div>
+    <div class="phase-body">
+      <div class="mission-box">
+        <strong>What you want to arrive with</strong>
+        An ad campaign running that doesn't need babysitting daily. A Shopify store fulfilling orders without manual input. £1k+/month revenue already proven before you land. A clear next 3-month plan for scaling from abroad.
+      </div>
+
+      <div class="weeks-grid">
+        <div class="week-card">
+          <div class="week-label">What You Want</div>
+          <ul>
+            <li>Ad campaign running without daily babysitting</li>
+            <li>Shopify store fulfilling orders autonomously</li>
+            <li>£1k+/month revenue proven before landing</li>
+            <li>A clear 3-month scaling plan from abroad</li>
+          </ul>
+        </div>
+        <div class="week-card">
+          <div class="week-label">What You Don't Want</div>
+          <ul>
+            <li>A store you "launched" but never actually sold from</li>
+            <li>An ad account eating money with no return</li>
+            <li>Starting from scratch in a new country with no income</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-box success">
+          <div class="outcome-label">✓ This Is Where It Gets Real</div>
+          <p>Thailand is not the finish line. It's where the real test begins — can you run this life on your terms, from anywhere, while building something real?</p>
+        </div>
+        <div class="outcome-box danger">
+          <div class="outcome-label">↗ Long Game</div>
+          <p>£10k/month is 2–3 years from here if you execute consistently. Thailand isn't the destination — it's just where you prove it's possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NON-NEGOTIABLES ─── -->
+<section class="habits-section" id="habits">
+  <div class="fade-up">
+    <div class="section-label">Non-Negotiables</div>
+    <h2>Every Week. No Exceptions.</h2>
+    <p class="sub">These are the minimum viable habits. Miss one week — fine. Miss three — you're off track.</p>
+  </div>
+
+  <div class="habit-grid fade-up">
+    <div class="habit-row">
+      <div class="habit-name">Ecom deep work</div>
+      <div class="habit-freq">Mon–Fri, 7:30–9:30pm</div>
+      <div class="habit-time">2 hrs/day</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">Weekly review</div>
+      <div class="habit-freq">Sunday evening — what worked, what didn't</div>
+      <div class="habit-time">20 mins</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">One new creative or test</div>
+      <div class="habit-freq">Weekly — built into ecom time</div>
+      <div class="habit-time">Ongoing</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">Read ad data</div>
+      <div class="habit-freq">Every 2 days</div>
+      <div class="habit-time">15 mins</div>
+    </div>
+    <div class="habit-row">
+      <div class="habit-name">One organic post (Instagram Reel)</div>
+      <div class="habit-freq">Weekly — from July onwards</div>
+      <div class="habit-time">30–60 mins</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GAP TABLE ─── -->
+<section class="gap-section" id="gaps">
+  <div class="fade-up">
+    <div class="section-label">Where You're Starting</div>
+    <h2>The Gap Summary</h2>
+    <p class="sub">Honest picture. These are the numbers to close between now and November.</p>
+  </div>
+
+  <table class="gap-table fade-up">
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Now</th>
+        <th></th>
+        <th>Thailand Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Monthly income (ecom)</td>
+        <td class="now">£0</td>
+        <td class="gap-arrow">→</td>
+        <td class="target">£1,000+</td>
+      </tr>
+      <tr>
+        <td>Active customers</td>
+        <td class="now">0</td>
+        <td class="gap-arrow">→</td>
+        <td class="target">50+</td>
+      </tr>
+      <tr>
+        <td>Winning ad creative</td>
+        <td class="now">Untested</td>
+        <td class="gap-arrow">→</td>
+        <td class="target">Found + scaling</td>
+      </tr>
+      <tr>
+        <td>Business runs without you</td>
+        <td class="now">No</td>
+        <td class="gap-arrow">→</td>
+        <td class="target">Yes (mostly)</td>
+      </tr>
+      <tr>
+        <td>Email list</td>
+        <td class="now">None</td>
+        <td class="gap-arrow">→</td>
+        <td class="target">100+ subscribers</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<footer>
+  <strong>Rivit Co.</strong> · Built June 2026 · <a href="https://rivitco.co.uk" style="color: var(--text-dim); text-decoration: none;">rivitco.co.uk</a>
+</footer>
+
+<script>
+  // scroll progress
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // toggle phases
+  function togglePhase(header) {
+    const card = header.closest('.phase-card');
+    card.classList.toggle('open');
+  }
+
+  // jump to phase
+  function jumpTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('open');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
